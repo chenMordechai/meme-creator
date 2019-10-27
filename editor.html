@@ -29,7 +29,8 @@
     <div class="main-container">
         <div class="canvas-container">
             <canvas onmousedown="onFindTouchedTxt(event)" onmousemove="onMoveTouchedTxt(event)"
-                onmouseup="onStopMovingMem()"  id="my-canvas" style="cursor: grab ;"></canvas>
+                onmouseup="onStopMovingMem()" ontouchstart="onFindTouchedTxt(event)" ontouchend="onStopMovingMem()"
+                ontouchmove="onMoveTouchedTxt(event)" id="my-canvas" style="cursor: grab ;"></canvas>
         </div>
 
         <div class="editor-container">

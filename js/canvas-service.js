@@ -99,20 +99,20 @@ function addSticker(el) {
 }
 
 function findTouchedTxtId(offsetX, offsetY) {
-    console.log('in chen entered')
+    // console.log('in chen entered')
     let factor = 5
     const clickedTxt = gTxts.find(txt => {
-        console.log('txt', txt)
-        console.log('offsetX, offsetY', offsetX, offsetY)
+        // console.log('txt', txt)
+        // console.log('offsetX, offsetY', offsetX, offsetY)
         return (
             offsetX - factor >= txt.x && offsetX <= txt.x + txt.width
             &&
             offsetY <= txt.y && offsetY >= txt.y - (+txt.size)
         )
     })
-    console.log('click oof', clickedTxt)
+    // console.log('click oof', clickedTxt)
     if (clickedTxt) {
-        console.log('in chen found txt')
+        // console.log('in chen found txt')
         gTouchedIdx = clickedTxt.id
     }
    

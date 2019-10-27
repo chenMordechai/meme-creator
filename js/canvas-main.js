@@ -18,10 +18,10 @@ function onInit() {
         drawImg()
         createTxts()
     }
-    addEventListener('touchstart', function(e) {
-        console.log('touch')
-        e.preventDefault();
-    });
+    // addEventListener('touchstart', function(e) {
+    //     console.log('touch')
+    //     e.preventDefault();
+    // });
 }
 
 function getAndCreateImg() {
@@ -170,7 +170,7 @@ function onAddTxt() {
 
 //onmousedown 
 function onFindTouchedTxt(ev) {
-    // ev.prevetnDefault()
+    ev.preventDefault()
     // event.preventDefault()
     console.log('chen')
     const { offsetX, offsetY } = ev
@@ -179,7 +179,8 @@ function onFindTouchedTxt(ev) {
 
 //onmousemove
 function onMoveTouchedTxt(ev) {
-    // console.log('chen2')
+    ev.preventDefault()
+        // console.log('chen2')
     const { offsetX, offsetY } = ev
     if (getTouchedIdx() || getTouchedIdx() === 0) {
         updateXY(offsetX, offsetY)
@@ -192,8 +193,9 @@ function onStopMovingMem() {
     // console.log('chen3')
     cleareTouchedIdx()
 }
+
 function onscroll(ev) {
-    event.preventDefault()
+    event.preventDefault
 }
 
 function onPutImoji(val) {
@@ -204,9 +206,4 @@ function onPutImoji(val) {
 function onPutSticker(el) {
     addSticker(el)
     ctx.drawImage(el, canvas.height / 3, canvas.height / 3, canvas.height / 3, canvas.height / 3)
-}
-
-
-function toggleNav(){
-    document.querySelector('.ul-nav').style.display = 'block'
 }
