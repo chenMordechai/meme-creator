@@ -18,6 +18,10 @@ function onInit() {
         drawImg()
         createTxts()
     }
+    addEventListener('touchstart', function(e) {
+        console.log('touch')
+        e.preventDefault();
+    });
 }
 
 function getAndCreateImg() {
