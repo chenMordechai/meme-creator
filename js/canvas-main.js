@@ -172,7 +172,7 @@ function onAddTxt() {
 function onFindTouchedTxt(ev) {
     ev.preventDefault()
     // event.preventDefault()
-    console.log('chen')
+    console.log('touch start')
     const { offsetX, offsetY } = ev
     findTouchedTxtId(offsetX, offsetY)
 }
@@ -180,7 +180,7 @@ function onFindTouchedTxt(ev) {
 //onmousemove
 function onMoveTouchedTxt(ev) {
     ev.preventDefault()
-        // console.log('chen2')
+    console.log('touch move')
     const { offsetX, offsetY } = ev
     if (getTouchedIdx() || getTouchedIdx() === 0) {
         updateXY(offsetX, offsetY)
@@ -190,7 +190,7 @@ function onMoveTouchedTxt(ev) {
 
 //onmouseup
 function onStopMovingMem() {
-    // console.log('chen3')
+    console.log('touch end')
     cleareTouchedIdx()
 }
 
