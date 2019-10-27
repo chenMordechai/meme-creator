@@ -1,0 +1,145 @@
+
+
+* {
+    box-sizing: border-box;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+    height: 80vh;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.editor-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* flex-wrap: wrap; */
+    border: 1px solid black;
+    width: 46%;
+    height: 80%;
+    padding: 10px;
+    border-radius: 17px;
+}
+
+.canvas-container {
+    align-items: center;
+    width: 46%;
+    display: flex;
+}
+
+#my-canvas {
+    margin: 0 auto;
+    max-width: 100%;
+    border: 1px solid #000000;
+    border-radius: 17px;
+}
+
+.button-container {
+    display: flex;
+    align-items:center;
+}
+
+.share-container {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.stickers-container{
+    display: flex;
+    flex-direction: row;
+    height: 70px;
+}
+.stickers-container img {
+    width: 70px;
+    align-content: flex-start;
+    object-fit: contain;
+    transition: transform 0.2s ease-out;
+    border-radius: 20px;
+  
+
+  }
+
+textarea {
+    max-width: 90%;
+    min-width: 90%;
+    height: 3rem;
+    /* max-height: 4rem; */
+    border: 1px solid black;
+    border-radius: 32px;
+    margin:0 auto;
+    font-family: impact, sans-serif;
+    font-size: 30px;
+    text-align: center;
+    background-color: rgb(126, 27, 165);
+    color: #fff;
+    
+}
+
+.publish {
+    background-color: rgb(21, 21, 168)
+}
+
+.impact {
+    font-size: 16px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+}
+
+.courier-New {
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.Pacifico {
+    font-family: 'Pacifico', cursive
+}
+
+#select-font {
+    height: 35px;
+    width: 100px;
+    border-radius: 4px
+}
+
+#font-size {
+    height: 35px;
+    width: 100px;
+    border-radius: 4px;
+}
+#size {
+    margin: 10px;
+    color: black;
+  }
+  
+.uploud{
+    width: 107px;
+  }
+.uploud input{
+    width: 100%;
+}  
+
+#line-choose{
+    width: 35px;
+    height: 35px;
+    border-radius: 5px;
+}
+
+@media screen and (max-width:740px){
+    .main-container{
+        flex-direction: column;
+        height: 700px;
+        justify-content: space-around;
+    }
+    .canvas-container{
+        width: 93%;
+    }
+
+    .editor-container{
+        width: 93%;
+        height: 400px;
+    }
+}

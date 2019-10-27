@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meme Generator-Chen</title>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.css">
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/canvas.css" />
+</head>
+
+<body onload="onInit()">
+    <header>
+        <a href="index.html">
+            <button>gallery</i></button>
+        </a>
+        <a href="editor.html">
+            <button>editor</i></button>
+        </a>
+        <select class="select-lang" onchange="onSelectLang(this.value)">
+            <option>language</option>
+            <option value="en">English</option>
+            <option value="he">עברית</option>
+        </select>
+    </header>
+    <div class="main-container">
+        <div class="canvas-container">
+            <canvas onmousedown="onFindTouchedTxt(event)" onmousemove="onMoveTouchedTxt(event)"
+                onmouseup="onStopMovingMem()"  id="my-canvas" style="cursor: grab ;"></canvas>
+        </div>
+
+        <div class="editor-container">
+            <textarea name="top-text" id="text-position" maxlength="35" onInput="onChangeTxt(this)"
+                onkeydown="onDeleteChar(event)" value="" placeholder="type here" autofocus></textarea>
+
+            <div class="lines-container">
+                <select id="line-choose" onchange="onChangeTxtIdx()">
+                    <option value="0"> 1</option>
+                    <option value="1"> 2</option>
+                </select>
+                <button onclick="onAddTxt()"><i class="fas fa-plus"></i></button>
+                <button onclick="onDeleteTxt()" class="button"><i class="fas fa-trash-alt"></i></button>
+            </div>
+            <div class="button-container">
+                <label for="fill-color"><button><i class="fas fa-palette"></i></button></label>
+                <input onchange="onChangeColor(this.value)" class="select-color" id="fill-color" type="color"
+                    value="#ffffff" style="display: none;" />
+
+                <select id="select-font" onchange="onChangeFont(this.value)">
+                    <option class="impact" value="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"> Impact
+                    </option>
+                    <option class="courier-New" value="'Courier New', Courier, monospace">Courier-New</option>
+                    <option class="Pacifico" value="'Pacifico', cursive">Pacifico</option>
+                </select>
+
+                <input type="range" id="font-size" name="font-size" min="16" max="100" value="36"
+                    onchange="onSelectSize(this.value);" />
+                <span id="size">36</span>
+            </div>
+            <div class="stickers-container">
+                <img onclick="onPutSticker(this)" src="img/stickers/0.jpg" alt="">
+                <img onclick="onPutSticker(this)" src="img/stickers/1.jpg" alt="">
+                <img onclick="onPutSticker(this)" src="img/stickers/2.jpg" alt="">
+                <!-- <div onclick="onPutImoji('😍')">😍</div>
+                <div>😎</div>
+                <div>😂</div> -->
+            </div>
+            <div class="share-container">
+                <form method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
+                    <input name="img" id="imgData" type="hidden" />
+                    <button class="publish" type="submit"><i class="fab fa-facebook-square"></i></button>
+                </form>
+                <button class="uploud"> <input type="file" name="image" onchange="onFileInputChange(event)" /></button>
+                <a href="#" onclick="downloadCanvas(this)" download="" class="button"><button><i
+                            class="fas fa-download"></i></button></a>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <img id="img-id" style="display:none;" />
+
+    <script src="js/util.js"></script>
+    <script src="js/canvas-main.js"></script>
+    <script src="js/canvas-service.js"></script>
+    <script src="js/download-share.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Meme</title>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/gallety.css" />
+</head>
+
+<body onload="init()">
+        <header>
+                <a href="index.html">
+                    <button>gallery</i></button>
+                </a>
+                <a href="editor.html">
+                    <button>editor</i></button>
+                </a>
+                <select class="select-lang" onchange="onSelectLang(this.value)">
+                    <option>language</option>
+                    <option value="en">English</option>
+                    <option value="he">עברית</option>
+                </select>
+            </header>
+
+
+
+    <div class="searching">
+        <input list="searching" data-trans="searching" class="search" name="searching" placeholder="filter by keywords"
+            onkeydown="checkEnter(event)" />
+        <datalist id="searching">
+            <option value="happy">
+            <option value="man">
+            <option value="woman">
+            <option value="angry">
+            <option value="child">
+        </datalist>
+        <button data-trans="search" onclick="onSearch()">search</button>
+    </div>
+        
+        <!-- <button  class="button" data-trans="load-80s"></button> -->
+        <ul class="tags">
+            <li><a href="#" onclick="onLoadTag(this)" data-loc="80" data-trans="load-80s" class="tag">"The  80's"</a></li>
+        </ul>
+
+    <div class="keyword-search">
+    </div>
+
+    <div class="main-container">
+    </div>
+
+    <section class="about-us">
+        <div class="chen">
+            <img src="img/creators/chen.jpg" alt="">
+            <div>
+                <h2 data-trans="chen">Chen Mordechai</h2>
+                <p data-trans="lorem-chen">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo
+                    quia assumenda minima magni
+                    ad illum eum odio numquam, quaerat corporis, dolorum aut et reprehenderit cum dolorem adipisci, in
+                    id?</p>
+            </div>
+        </div>
+       
+    </section>
+
+    <div class="contact-us">
+        <h2 data-trans="contact">Get in touch</h2>
+        <h3 data-trans="p-contact">In order to get in touch use the contactform below</h3>
+        <div class="email">
+            <p data-trans="mail">Your E-mail</p>
+            <input class="input-mail" type="text" placeholder="Name@example.com">
+        </div>
+        <div class=section"subject">
+            <p data-trans="sub">Subject</p>
+            <input class="input-subject" type="text" placeholder="Type subject here">
+        </div>
+        <div class="text">
+            <p data-trans="msg">Message body</p>
+            <input class="input-text" type="text" placeholder="Type message text here">
+        </div>
+
+        <button data-trans="submit" type="button" onclick="onSubmit()" class="btn btn-primary">submit</button>
+    </section>
+
+    </div>
+
+
+    <script src="js/util.js"></script>
+    <script src="js/gallery-service.js"></script>
+    <script src="js/trans-service.js"></script>
+    <script src="js/gallery-main.js"></script>
+</body>
+
+</html>
