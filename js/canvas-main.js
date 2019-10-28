@@ -1,20 +1,21 @@
 'use strict'
 
-const canvas = document.querySelector('#my-canvas');
-const ctx = canvas.getContext('2d')
-const gElTextArea = document.querySelector('#text-position')
-
-let elImg = document.querySelector('#img-id')
-const elCanvasContainer = document.querySelector('.canvas-container')
+let canvas;
+let ctx;
+let elCanvasContainer;
+let gElTextArea;
+let elImg;
 
 let canvasWidth;
 let canvasHeight;
 
 function onInit() {
+    elImg = document.querySelector('#img-id')
+    gElTextArea = document.querySelector('#text-position')
     getAndCreateImg()
     //when elImg is load we create the canvas 
     elImg.onload = () => {
-        createCanvas()
+        resetCanvas()
         drawImg()
         createTxts()
     }
@@ -37,16 +38,16 @@ function getAndCreateImg() {
 }
 
 //updating the width and height of the canvas
-function createCanvas() {
-    var aspectRatio = document.querySelector('#img-id').width / document.querySelector('#img-id').height
-    // canvasWidth = Math.min(vw(), document.querySelector('#img-id').naturalWidth)
-    // canvasHeight = Math.min(vh(), document.querySelector('#img-id').naturalHeight) - 20;
-    canvas.height = canvas.width * aspectRatio
-    canvas.width = canvas.height * aspectRatio
-    // elCanvasContainer.height = canvas.height
-    // elCanvasContainer.width = canvas.width
-
+function resetCanvas() {
+    canvas = document.querySelector('#my-canvas');
+    ctx = canvas.getContext('2d')
+    elCanvasContainer = document.querySelector('.canvas-container')
+    let containerWidth = elCanvasContainer.offsetWidth
+    let imagAspectRatio = elImg.width / elImg.height
+    canvas.width = containerWidth;
+    canvas.height = canvas.width / imagAspectRatio
 }
+   
 
 //when select txt
 function onChangeTxtIdx() {
@@ -207,3 +208,6 @@ function onPutSticker(el) {
     addSticker(el)
     ctx.drawImage(el, canvas.height / 3, canvas.height / 3, canvas.height / 3, canvas.height / 3)
 }
+
+
+//content editible
