@@ -47,7 +47,7 @@ function resetCanvas() {
     canvas.width = containerWidth;
     canvas.height = canvas.width / imagAspectRatio
 }
-   
+
 
 //when select txt
 function onChangeTxtIdx() {
@@ -172,26 +172,36 @@ function onAddTxt() {
 //onmousedown 
 function onFindTouchedTxt(ev) {
     ev.preventDefault()
-    // event.preventDefault()
-    console.log('touch start')
-    const { offsetX, offsetY } = ev
-    findTouchedTxtId(offsetX, offsetY)
+    let mousePos = findMousePose(ev)
+    findTouchedTxtId(mousePos.x, mousePos.y)
 }
 
+function findMousePose(ev) {
+    let mouseX = ev.clientX - canvas.offsetLeft;
+    let mouseY = ev.clientY - canvas.offsetTop;
+
+    if (!mouseX && !mouseY) {
+        mouseX = ev.changedTouches[0].clientX - canvas.offsetLeft;
+        mouseY = ev.changedTouches[0].clientY - canvas.offsetTop;
+    }
+    let mousePose = {
+        x: mouseX,
+        y: mouseY
+    }
+    return mousePose
+}
 //onmousemove
 function onMoveTouchedTxt(ev) {
     ev.preventDefault()
-    console.log('touch move')
-    const { offsetX, offsetY } = ev
+    let mousePos = findMousePose(ev)
     if (getTouchedIdx() || getTouchedIdx() === 0) {
-        updateXY(offsetX, offsetY)
+        updateXY(mousePos.x, mousePos.y)
         drawText()
     }
 }
 
 //onmouseup
 function onStopMovingMem() {
-    console.log('touch end')
     cleareTouchedIdx()
 }
 

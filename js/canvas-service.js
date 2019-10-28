@@ -119,6 +119,7 @@ function findTouchedTxtId(offsetX, offsetY) {
 }
 
 function updateXY(offsetX, offsetY) {
+    console.log('update x y')
     gTxts[gTouchedIdx].x = offsetX
     gTxts[gTouchedIdx].y = offsetY
 }
