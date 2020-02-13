@@ -3,14 +3,54 @@
 * {
     box-sizing: border-box;
 }
+body{
+    background-color:rgb(231, 229, 229);
+    margin: 0;
+}
+header{
+    background-color: rgb(241, 135, 153);
+    height: 80px;
+    display: flex;
+    justify-content: flex-end;
+}
 
+.links-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+}
+
+.links-container a{
+    font-size: 20px;
+    font-weight: 2px;
+    font-family: cursive;
+}
+
+img.icon{
+    height: 50px;
+    width: 50px;
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 10px;
+    margin: 8px;
+}
+img.icon:hover{
+    cursor: pointer;
+}
 .main-container {
     display: flex;
     flex-direction: row;
-    width: 100vw;
+    width: 90vw;
     height: 80vh;
     justify-content: space-around;
     align-items: center;
+    margin: 0 auto;
+}
+.lines-container{
+    display: flex;
+    /* width: 80%; */
 }
 
 .editor-container {
@@ -19,7 +59,7 @@
     justify-content: space-around;
     align-items: center;
     /* flex-wrap: wrap; */
-    border: 1px solid black;
+    /* border: 1px solid black; */
     width: 46%;
     height: 80%;
     padding: 10px;
@@ -28,14 +68,15 @@
 
 .canvas-container {
     align-items: center;
-    width: 46%;
+    width: 38%;
+    /* width: 500px; */
     display: flex;
-    height: 500px;
+    height: 400px;
 }
 
 #my-canvas {
     margin: 0 auto;
-    max-width: 100%;
+    /* max-width: 100%; */
     border: 1px solid #000000;
     border-radius: 17px;
 }
@@ -51,34 +92,48 @@
     justify-content: center;
     flex-wrap: wrap;
 }
-.stickers-container{
+.emoji-container{
     display: flex;
     flex-direction: row;
-    height: 70px;
+    height: 60px;
+    background-color: #fff;
+    width: 340px;
+    border-radius: 10px;
+    padding: 5px 0;
+    justify-content: space-between;
+    align-items: center;
 }
-.stickers-container img {
-    width: 70px;
-    align-content: flex-start;
-    object-fit: contain;
-    transition: transform 0.2s ease-out;
-    border-radius: 20px;
-  
+.emoji-container img{
+    width: 32px;
+    height: 30px
+}
+.emoji-container img:hover{
+    cursor: pointer;
+}
+.emoji-container .emoji{
+    font-size: 36px;
+}
+.emoji-container .emoji:hover{
+    cursor: pointer;
 
-  }
+}
+
 
 textarea {
-    max-width: 90%;
-    min-width: 90%;
-    height: 3rem;
+    /* max-width: 90%;
+    min-width: 90%; */
+    height: 4rem;
+    width: 350px;
     /* max-height: 4rem; */
-    border: 1px solid black;
-    border-radius: 32px;
+    border: 1px solid white;
+    border-radius: 10px;
     margin:0 auto;
     font-family: impact, sans-serif;
     font-size: 30px;
     text-align: center;
-    background-color: rgb(126, 27, 165);
-    color: #fff;
+    background-color: rgb(175, 170, 177);
+    /* color: black; */
+    padding: 12px;
     
 }
 
@@ -101,9 +156,12 @@ textarea {
 }
 
 #select-font {
-    height: 35px;
-    width: 100px;
-    border-radius: 4px
+    height: 50px;
+    width: 116px;
+    border-radius: 10px;
+    border: 1px solid white;
+    padding: 3px;
+    margin: 8px;
 }
 
 #font-size {
@@ -137,6 +195,7 @@ textarea {
     }
     .canvas-container{
         width: 93%;
+        width: 500px;
     }
 
     .editor-container{

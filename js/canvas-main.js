@@ -5,24 +5,26 @@ let ctx;
 let elCanvasContainer;
 let gElTextArea;
 let elImg;
-
 let canvasWidth;
 let canvasHeight;
 
 function onInit() {
+    canvas = document.querySelector('#my-canvas');
+    ctx = canvas.getContext('2d')
     elImg = document.querySelector('#img-id')
     gElTextArea = document.querySelector('#text-position')
+    renderEmoji()
     getAndCreateImg()
     //when elImg is load we create the canvas 
     elImg.onload = () => {
         resetCanvas()
         drawImg()
         createTxts()
+        drawText()
+        changeTextArea()
+
     }
-    // addEventListener('touchstart', function(e) {
-    //     console.log('touch')
-    //     e.preventDefault();
-    // });
+
 }
 
 function getAndCreateImg() {
@@ -39,37 +41,44 @@ function getAndCreateImg() {
 
 //updating the width and height of the canvas
 function resetCanvas() {
-    canvas = document.querySelector('#my-canvas');
-    ctx = canvas.getContext('2d')
+
     elCanvasContainer = document.querySelector('.canvas-container')
     let containerWidth = elCanvasContainer.offsetWidth
-    let imagAspectRatio = elImg.width / elImg.height
-    canvas.width = containerWidth;
-    canvas.height = canvas.width / imagAspectRatio
+    let containerHeight = elCanvasContainer.offsetHeight
+    let imagAspectRatio = elImg.height / elImg.width
+    if (imagAspectRatio >= 1) {
+        canvas.height = containerHeight
+        canvas.width = (1 / imagAspectRatio) * canvas.height
+    } else {
+        canvas.width = containerWidth
+        canvas.height = canvas.width * imagAspectRatio
+    }
 }
 
 
 //when select txt
-function onChangeTxtIdx() {
-    let txtIdx = document.querySelector('#line-choose').value
-    changeGcurrTxtIdx(txtIdx)
-    // gcurrTxtIdx = +txtIdx
+function onChangeTxtIdx(txtIdx) {
     changeEditorElements()
     changeTextArea()
 }
 
+function markLine() {
+    drawText()
+    var txt = getCurrTxt()
+    ctx.rect(txt.x, txt.y - txt.size, txt.width, (+txt.size))
+    ctx.stroke()
+
+}
+
 //change the value of the buttons/selects by the curr txt
 function changeEditorElements() {
-    // let txt = gTxts[gcurrTxtIdx]
     let txt = getCurrTxt()
-    document.getElementById("size").innerHTML = txt.size
     document.getElementById("select-font").value = txt.font
     document.getElementById("fill-color").value = txt.color
 }
 
 //change the txt area to look like the txt
 function changeTextArea() {
-    // let txt = gTxts[gcurrTxtIdx]
     let txt = getCurrTxt()
     gElTextArea.value = txt.txt
     gElTextArea.style = `color:${txt.color}; font-family:${txt.font};`
@@ -83,15 +92,13 @@ function drawImg() {
 //when click to change the font
 function onChangeFont(currFont) {
     changeFont(currFont)
-    // gTxts[gcurrTxtIdx].font = currFont
     changeTextArea()
     drawText()
 }
 
 //when click to change the font-size
-function onSelectSize(currSize) {
-    document.getElementById("size").innerHTML = currSize
-    changeSize(currSize)
+function onSelectSize(diff) {
+    changeSize(diff)
     changeTextArea()
     drawText()
 }
@@ -99,6 +106,12 @@ function onSelectSize(currSize) {
 //when click to change the color
 function onChangeColor(currColor) {
     changeColor(currColor)
+    changeTextArea()
+    drawText()
+}
+
+function onCangeStrokeColor(strokeColor) {
+    changeStrokeColor(strokeColor)
     changeTextArea()
     drawText()
 }
@@ -113,20 +126,19 @@ function onChangeTxt(el) {
 
 function drawText() {
     clearCanvas()
-    getTxts().forEach(txt => {
+    drawImg()
+    getTxts().forEach((txt, idx) => {
         let currFont = txt.size + 'px ' + txt.font
         ctx.font = currFont
         ctx.fillStyle = txt.color
-        ctx.strokeStyle = '#000000'
+        ctx.strokeStyle = txt.strokeColor
         // ctx.textAlign = txt.align
+        // ctx.textAlign = 'center'
         ctx.fillText(txt.txt, txt.x, txt.y)
         ctx.strokeText(txt.txt, txt.x, txt.y)
         // for moves the words
         let metrics = ctx.measureText(txt.txt)
         txt.width = Math.ceil(metrics.width)
-    })
-    getStickers().forEach(s => {
-        onPutSticker(s.el)
     })
 }
 
@@ -148,42 +160,41 @@ function onDeleteChar(event) {
 function onDeleteTxt() {
     //delete in the service
     deleteTxt()
-    changeTextArea()
-    changeEditorElements()
+    onChangeTxtIdx()
     drawText()
 }
 
 // clear the canves
 function clearCanvas() {
     ctx.clearRect(0, 0, canvas.width, canvas.height)
-    drawImg()
 }
 
 //when click to add txt
 function onAddTxt() {
     addTxt()
-    //add option in the select
-    let currSelectors = document.querySelector('#line-choose').innerHTML
-    let HTMLSelectors = `<option value="${gTxts.length - 1}"> ${gTxts.length}</option>`
-    let elSelcetMem = document.querySelector('#line-choose')
-    elSelcetMem.innerHTML = currSelectors + HTMLSelectors
+    onChangeTxtIdx()
+    drawText()
 }
 
+function onPutImoji(val) {
+    console.log('emoji')
+    addEmoji(val)
+    onChangeTxtIdx()
+    drawText()
+}
 //onmousedown 
 function onFindTouchedTxt(ev) {
     ev.preventDefault()
     let mousePos = findMousePose(ev)
-    findTouchedTxtId(mousePos.x, mousePos.y)
+    var TouchedTxt = findTouchedTxt(mousePos.x, mousePos.y)
+    if (TouchedTxt) {
+        onChangeTxtIdx(getTouchedIdx())
+    }
 }
 
 function findMousePose(ev) {
-    let mouseX = ev.clientX - canvas.offsetLeft;
-    let mouseY = ev.clientY - canvas.offsetTop;
-
-    if (!mouseX && !mouseY) {
-        mouseX = ev.changedTouches[0].clientX - canvas.offsetLeft;
-        mouseY = ev.changedTouches[0].clientY - canvas.offsetTop;
-    }
+    let mouseX = ev.offsetX;
+    let mouseY = ev.offsetY;
     let mousePose = {
         x: mouseX,
         y: mouseY
@@ -209,15 +220,22 @@ function onscroll(ev) {
     event.preventDefault
 }
 
-function onPutImoji(val) {
-    ctx.fillText(val, canvas.width / 2, canvas.height / 2)
-    ctx.font = '120px'
+function renderEmoji() {
+    var elEmogiContainer = document.querySelector('.emoji-container')
+    var emojies = getEmogiesToShow()
+    console.log(emojies)
+    var from = 0
+    var strHtml = ''
+    strHtml += `<img src="./icons/left-arrow.png" onclick="renderMoreEmoji(-1)">`
+    for (var i = from; i < 5; i++) {
+        strHtml +=`<div class="emoji" onclick="onPutImoji('${emojies[i]}')">${emojies[i]}</div>`
+    }
+    strHtml += `<img src="./icons/right-arrow.png" onclick="renderMoreEmoji(1)">`
+    elEmogiContainer.innerHTML = strHtml
 }
 
-function onPutSticker(el) {
-    addSticker(el)
-    ctx.drawImage(el, canvas.height / 3, canvas.height / 3, canvas.height / 3, canvas.height / 3)
+function renderMoreEmoji(diff) {
+    console.log(diff)
+    changeEmojiesRange(diff)
+    renderEmoji()
 }
-
-
-//content editible

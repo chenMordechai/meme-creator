@@ -1,14 +1,18 @@
 'use strict'
 let gTxts = []
-let gcurrTxtIdx = 0;
+let gCurrTxtIdx = 0;
 let gId = 0
 let gimgId = 0
 let gTouchedIdx;
-let gStickers = []
+let gEmojies = createEmojies()
+var gEmojiesRange = 0
+var gNumOfEmogies = 5
 
-const gDefaultFontSize = '36';
+
+const gDefaultFontSize = 42;
 const gDefaultFont = 'impact'
 const gDefaultColor = document.getElementById("fill-color").value
+const gDefaultStrokeColor = 'black'
 
 function createTxts() {
     //top txt
@@ -17,7 +21,15 @@ function createTxts() {
     gTxts.push(creteTxt(canvas.width / 10, canvas.height - 30))
 }
 
-function creteTxt(x, y, txt = '', size = gDefaultFontSize, font = gDefaultFont, align = 'left', width = 0, color = gDefaultColor) {
+function createEmoji(x, y, val) {
+    return {
+        x: x,
+        y: y,
+        val: val,
+        size: gDefaultFontSize
+    }
+}
+function creteTxt(x, y, txt = 'New Line', size = gDefaultFontSize, font = gDefaultFont, align = 'left', width = 0, color = gDefaultColor, strokeColor = gDefaultStrokeColor) {
     return {
         x: x,
         y: y,
@@ -27,7 +39,10 @@ function creteTxt(x, y, txt = '', size = gDefaultFontSize, font = gDefaultFont, 
         font: font,
         width: width,
         align: align,
-        color: color
+        color: color,
+        strokeColor: strokeColor,
+        onEditor: false
+
     }
 }
 
@@ -38,92 +53,103 @@ function getImgUrl() {
 function getTxts() {
     return gTxts
 }
-function getTouchedIdx(){
+function getTouchedIdx() {
     return gTouchedIdx
 }
 
-function getStickers() {
-    return gStickers
+function findCurrTxtIdx(id) {
+    return gTxts.findIndex(txt => {
+        return txt.id === id
+    })
 }
 
-function changeGcurrTxtIdx(txtIdx) {
-    gcurrTxtIdx = +txtIdx
-}
-function getGcurrTxtIdx() {
-    return gcurrTxtIdx
+function findCurrTxt(id) {
+    return gTxts.find(txt => {
+        return txt.id === id
+    })
 }
 
 function getCurrTxt() {
-    return gTxts[gcurrTxtIdx]
+    return gTxts[gCurrTxtIdx]
 }
 
 function changeFont(currFont) {
-    gTxts[gcurrTxtIdx].font = currFont
+    gTxts[gCurrTxtIdx].font = currFont
 }
 
-function changeSize(currSize) {
-    gTxts[gcurrTxtIdx].size = currSize
-    // gTxts[gcurrTextIdx].y += currSize
+function changeSize(diff) {
+    gTxts[gCurrTxtIdx].size += diff
 }
 
 function changeColor(currColor) {
-    gTxts[gcurrTxtIdx].color = currColor
+    gTxts[gCurrTxtIdx].color = currColor
+}
+
+function changeStrokeColor(strokeColor) {
+    gTxts[gCurrTxtIdx].strokeColor = strokeColor
 }
 
 function changeText(txtVal) {
-    gTxts[gcurrTxtIdx].txt = txtVal
+    gTxts[gCurrTxtIdx].txt = txtVal
 
 }
 
 //when click on delete
 function deleteOneChar() {
-    gTxts[gcurrTxtIdx].txt = gElTextArea.value
+    gTxts[gCurrTxtIdx].txt = gElTextArea.value
     //after the textarea value change its call the function onChangeTxt()
 }
 
 function deleteTxt() {
-    let txt = gTxts[gcurrTxtIdx]
-    txt.txt = ''
-    txt.size = gDefaultFontSize
-    txt.color = gDefaultColor
-    txt.font = gDefaultFont
+    gTxts.splice(gCurrTxtIdx, 1)
+    gCurrTxtIdx = 0
 }
 
 //add txt to the gTxt
 function addTxt() {
-    gTxts.push(creteTxt(canvasWidth / 10, canvasHeight / 2))
+    gTxts.push(creteTxt(canvas.width / 10, canvas.height / 2))
+    gCurrTxtIdx = gTxts.length - 1
 }
 
-function addSticker(el) {
-    gStickers.push({ el: el, imgId:gimgId++ , x:canvas.height/3 , y:canvas.height/3 })
+function addEmoji(val) {
+    gTxts.push(creteTxt(canvas.width / 10, canvas.height / 2, val))
+    gCurrTxtIdx = gTxts.length - 1
 }
 
-function findTouchedTxtId(offsetX, offsetY) {
-    // console.log('in chen entered')
+function findTouchedTxt(offsetX, offsetY) {
     let factor = 5
     const clickedTxt = gTxts.find(txt => {
-        // console.log('txt', txt)
-        // console.log('offsetX, offsetY', offsetX, offsetY)
         return (
-            offsetX - factor >= txt.x && offsetX <= txt.x + txt.width
-            &&
-            offsetY <= txt.y && offsetY >= txt.y - (+txt.size)
+            offsetX - factor >= txt.x
+            && offsetX <= txt.x + txt.width
+            && offsetY <= txt.y
+            && offsetY >= txt.y - (+txt.size)
         )
     })
-    // console.log('click oof', clickedTxt)
     if (clickedTxt) {
-        // console.log('in chen found txt')
-        gTouchedIdx = clickedTxt.id
+        gTouchedIdx = findCurrTxtIdx(clickedTxt.id)
+        gCurrTxtIdx = findCurrTxtIdx(clickedTxt.id)
     }
-   
+    return clickedTxt
 }
 
 function updateXY(offsetX, offsetY) {
-    console.log('update x y')
     gTxts[gTouchedIdx].x = offsetX
     gTxts[gTouchedIdx].y = offsetY
 }
 
 function cleareTouchedIdx() {
     gTouchedIdx = null
+}
+function createEmojies() {
+    return ['🎉', '💯', '😂', '🐶', '🌸', '🎸', '🔍', '💖️', '🎀']
+}
+function changeEmojiesRange(diff) {
+    if (gEmojiesRange === 0 && diff < 0) return
+    if (gEmojiesRange === gEmojies.length - gNumOfEmogies && diff > 0) return
+    gEmojiesRange += diff
+}
+function getEmogiesToShow() {
+    var emogiesToShow = gEmojies.slice(gEmojiesRange, gNumOfEmogies + gEmojiesRange)
+    return emogiesToShow
 }

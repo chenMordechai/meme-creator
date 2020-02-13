@@ -14,42 +14,51 @@
 
 <body onload="onInit()">
     <header>
-        <a href="index.html">
-            <button>gallery</i></button>
-        </a>
-        <a href="editor.html">
-            <button>editor</i></button>
-        </a>
-        <select class="select-lang" onchange="onSelectLang(this.value)">
-            <option>language</option>
-            <option value="en">English</option>
-            <option value="he">עברית</option>
-        </select>
+        <div class="links-container">
+            <a href="index.html">
+                Gallery
+            </a>
+            <a href="editor.html">
+                Editor
+            </a>
+            <select class="select-lang" onchange="onSelectLang(this.value)">
+                <option>language</option>
+                <option value="en">English</option>
+                <option value="he">עברית</option>
+            </select>
+        </div>
     </header>
     <div class="main-container">
         <div class="canvas-container">
             <canvas onmousedown="onFindTouchedTxt(event)" onmousemove="onMoveTouchedTxt(event)"
                 onmouseup="onStopMovingMem()" ontouchstart="onFindTouchedTxt(event)" ontouchend="onStopMovingMem()"
-                ontouchmove="onMoveTouchedTxt(event)" ontouchcancel="onMoveTouchedTxt(event)"  id="my-canvas" style="cursor: grab ;"></canvas>
+                ontouchmove="onMoveTouchedTxt(event)" ontouchcancel="onMoveTouchedTxt(event)" id="my-canvas"
+                style="cursor: grab ;"></canvas>
         </div>
 
         <div class="editor-container">
             <textarea name="top-text" id="text-position" maxlength="35" onInput="onChangeTxt(this)"
-                onkeydown="onDeleteChar(event)" value="" placeholder="type here" autofocus></textarea>
+                onkeydown="onDeleteChar(event)" value="" autofocus></textarea>
 
             <div class="lines-container">
-                <select id="line-choose" onchange="onChangeTxtIdx()">
+                <!-- <select id="line-choose" onchange="onChangeTxtIdx()">
                     <option value="0"> 1</option>
                     <option value="1"> 2</option>
-                </select>
-                <button onclick="onAddTxt()"><i class="fas fa-plus"></i></button>
-                <button onclick="onDeleteTxt()" class="button"><i class="fas fa-trash-alt"></i></button>
-            </div>
-            <div class="button-container">
-                <label for="fill-color"><button><i class="fas fa-palette"></i></button></label>
-                <input onchange="onChangeColor(this.value)" class="select-color" id="fill-color" type="color"
-                    value="#ffffff" style="display: none;" />
+                </select> -->
+                <img onclick="onAddTxt()" class="icon" src="icons/add.png" alt="">
+                <!-- <button onclick="onAddTxt()"><i class="fas fa-plus"></i></button> -->
+                <img onclick="onDeleteTxt()" class="icon" src="icons/trash.png" alt="">
+                <!-- <button onclick="onDeleteTxt()" class="button"><i class="fas fa-trash-alt"></i></button> -->
+                <!-- <div class="button-container"> -->
 
+                <img onclick="onSelectSize(1)" class="icon" src="icons/increase font - icon.png" alt="">
+                <img onclick="onSelectSize(-1)" class="icon" src="icons/decrease font - icon.png" alt="">
+                <!-- <input type="range" id="font-size" name="font-size" min="16" max="100" value="36"
+                        onchange="onSelectSize(this.value);" />
+                        <span id="size">36</span> -->
+
+            </div>
+            <div class="lines-container">
                 <select id="select-font" onchange="onChangeFont(this.value)">
                     <option class="impact" value="Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif"> Impact
                     </option>
@@ -57,17 +66,19 @@
                     <option class="Pacifico" value="'Pacifico', cursive">Pacifico</option>
                 </select>
 
-                <input type="range" id="font-size" name="font-size" min="16" max="100" value="36"
-                    onchange="onSelectSize(this.value);" />
-                <span id="size">36</span>
+                <label for="fill-color"> <img class="icon" src="icons/paint-board-and-brush.png" alt="">
+                </label>
+                <input onchange="onChangeColor(this.value)" class="select-color" id="fill-color" type="color"
+                    value="#ffffff" style="display: none;" />
+
+                <label for="stroke-color"> <img class="icon" src="icons/text stroke.png" alt="">
+                </label>
+                <input onchange="onCangeStrokeColor(this.value)" class="select-color" id="stroke-color" type="color"
+                    value="#000000" style="display: none;" />
             </div>
-            <div class="stickers-container">
-                <img onclick="onPutSticker(this)" src="img/stickers/0.jpg" alt="">
-                <img onclick="onPutSticker(this)" src="img/stickers/1.jpg" alt="">
-                <img onclick="onPutSticker(this)" src="img/stickers/2.jpg" alt="">
-                <!-- <div onclick="onPutImoji('😍')">😍</div>
-                <div>😎</div>
-                <div>😂</div> -->
+
+            <div class="emoji-container">
+                <!-- Icons made by <a href="https://www.flaticon.com/authors/roundicons" title="Roundicons">Roundicons</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a> -->
             </div>
             <div class="share-container">
                 <form method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
@@ -76,12 +87,13 @@
                 </form>
                 <button class="uploud"> <input type="file" name="image" onchange="onFileInputChange(event)" /></button>
                 <a href="#" onclick="downloadCanvas(this)" download="" class="button"><button><i
-                            class="fas fa-download"></i></button></a>
+                    class="fas fa-download"></i></button></a>
+                </div>
             </div>
         </div>
     </div>
-    </div>
-
+</div>
+    
     <img id="img-id" style="display:none;" />
 
     <script src="js/util.js"></script>

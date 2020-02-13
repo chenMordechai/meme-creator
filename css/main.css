@@ -41,8 +41,9 @@ button:hover {
 
 .select-lang {
   border-radius: 4px;
-  margin: 0 1rem;
+  /* margin: 0 1rem; */
   height: 2rem;
+  border: 1px solid white;
 }
 
 .button-container>button {
@@ -66,7 +67,7 @@ button:hover {
     width: 90%;
     height: 90%;
   } */
-  img {
+  .chen img {
     width: 160px;
   }
   .about-us img {
