@@ -41,13 +41,11 @@ function getAndCreateImg() {
 
 //updating the width and height of the canvas
 function resetCanvas() {
+
     elCanvasContainer = document.querySelector('.canvas-container')
     let containerWidth = elCanvasContainer.offsetWidth
     let containerHeight = elCanvasContainer.offsetHeight
-
-
     let imagAspectRatio = elImg.height / elImg.width
-
     if (imagAspectRatio >= 1) {
         canvas.height = containerHeight
         canvas.width = (1 / imagAspectRatio) * canvas.height
@@ -134,7 +132,7 @@ function drawText() {
         ctx.font = currFont
         ctx.fillStyle = txt.color
         ctx.strokeStyle = txt.strokeColor
-        ctx.textAlign = txt.align
+        // ctx.textAlign = txt.align
         // ctx.textAlign = 'center'
         ctx.fillText(txt.txt, txt.x, txt.y)
         ctx.strokeText(txt.txt, txt.x, txt.y)
@@ -179,6 +177,7 @@ function onAddTxt() {
 }
 
 function onPutImoji(val) {
+    console.log('emoji')
     addEmoji(val)
     onChangeTxtIdx()
     drawText()
@@ -224,6 +223,7 @@ function onscroll(ev) {
 function renderEmoji() {
     var elEmogiContainer = document.querySelector('.emoji-container')
     var emojies = getEmogiesToShow()
+    console.log(emojies)
     var from = 0
     var strHtml = ''
     strHtml += `<img src="./icons/left-arrow.png" onclick="renderMoreEmoji(-1)">`

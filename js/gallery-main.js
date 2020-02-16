@@ -58,7 +58,7 @@ function onSearchByKeywords(keyword) {
 //render the gallery
 function renderImgs(imgs) {
     let htmlImg = imgs.map(img => {
-        return `<div class="img img-${img.id} data">
+        return `<div class="img-${img.id}">
         <img onclick="onImgClicked('${img.url}')" src="img/${img.url}" />
     </div>`
     });

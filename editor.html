@@ -41,22 +41,10 @@
                 onkeydown="onDeleteChar(event)" value="" autofocus></textarea>
 
             <div class="lines-container">
-                <!-- <select id="line-choose" onchange="onChangeTxtIdx()">
-                    <option value="0"> 1</option>
-                    <option value="1"> 2</option>
-                </select> -->
                 <img onclick="onAddTxt()" class="icon" src="icons/add.png" alt="">
-                <!-- <button onclick="onAddTxt()"><i class="fas fa-plus"></i></button> -->
                 <img onclick="onDeleteTxt()" class="icon" src="icons/trash.png" alt="">
-                <!-- <button onclick="onDeleteTxt()" class="button"><i class="fas fa-trash-alt"></i></button> -->
-                <!-- <div class="button-container"> -->
-
                 <img onclick="onSelectSize(1)" class="icon" src="icons/increase font - icon.png" alt="">
                 <img onclick="onSelectSize(-1)" class="icon" src="icons/decrease font - icon.png" alt="">
-                <!-- <input type="range" id="font-size" name="font-size" min="16" max="100" value="36"
-                        onchange="onSelectSize(this.value);" />
-                        <span id="size">36</span> -->
-
             </div>
             <div class="lines-container">
                 <select id="select-font" onchange="onChangeFont(this.value)">
@@ -83,11 +71,10 @@
             <div class="share-container">
                 <form method="POST" enctype="multipart/form-data" onsubmit="uploadImg(this, event)">
                     <input name="img" id="imgData" type="hidden" />
-                    <button class="publish" type="submit"><i class="fab fa-facebook-square"></i></button>
+                  <button type="submit"><img class="publish" src="./icons/facebook-logo.png" alt=""></button>
                 </form>
                 <button class="uploud"> <input type="file" name="image" onchange="onFileInputChange(event)" /></button>
-                <a href="#" onclick="downloadCanvas(this)" download="" class="button"><button><i
-                    class="fas fa-download"></i></button></a>
+                <a href="#" onclick="downloadCanvas(this)" download="" class="button"><button><img src="./icons/download.png" alt=""></button></a>
                 </div>
             </div>
         </div>

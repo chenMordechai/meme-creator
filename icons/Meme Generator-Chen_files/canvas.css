@@ -1,13 +1,13 @@
+
+
 * {
     box-sizing: border-box;
 }
-
-body {
-    background-color: rgb(231, 229, 229);
+body{
+    background-color:rgb(231, 229, 229);
     margin: 0;
 }
-
-header {
+header{
     background-color: rgb(241, 135, 153);
     height: 80px;
     display: flex;
@@ -15,7 +15,7 @@ header {
     margin-bottom: 10px;
 }
 
-.links-container {
+.links-container{
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -23,13 +23,13 @@ header {
     height: 100%;
 }
 
-.links-container a {
+.links-container a{
     font-size: 20px;
     font-weight: 2px;
     font-family: cursive;
 }
 
-img.icon {
+img.icon{
     height: 50px;
     width: 50px;
     background-color: #fff;
@@ -37,11 +37,9 @@ img.icon {
     border-radius: 10px;
     margin: 8px;
 }
-
-img.icon:hover {
+img.icon:hover{
     cursor: pointer;
 }
-
 .main-container {
     display: flex;
     flex-direction: row;
@@ -51,8 +49,7 @@ img.icon:hover {
     align-items: center;
     margin: 0 auto;
 }
-
-.lines-container {
+.lines-container{
     display: flex;
     /* width: 80%; */
 }
@@ -86,7 +83,7 @@ img.icon:hover {
 
 .button-container {
     display: flex;
-    align-items: center;
+    align-items:center;
 }
 
 .share-container {
@@ -95,20 +92,18 @@ img.icon:hover {
     justify-content: center;
     flex-wrap: wrap;
 }
-
-.share-container img {
+.share-container img{
     height: 50px;
     width: 50px;
     background-color: #fff;
     padding: 8px;
     border-radius: 10px;
 }
-
-.share-container img:hover {
+.share-container img:hover{
     cursor: pointer;
 }
 
-.emoji-container {
+.emoji-container{
     display: flex;
     flex-direction: row;
     height: 60px;
@@ -119,23 +114,21 @@ img.icon:hover {
     justify-content: space-between;
     align-items: center;
 }
-
-.emoji-container img {
+.emoji-container img{
     width: 32px;
     height: 30px
 }
-
-.emoji-container img:hover {
+.emoji-container img:hover{
     cursor: pointer;
 }
-
-.emoji-container .emoji {
+.emoji-container .emoji{
     font-size: 36px;
 }
-
-.emoji-container .emoji:hover {
+.emoji-container .emoji:hover{
     cursor: pointer;
+
 }
+
 
 textarea {
     /* max-width: 90%;
@@ -145,14 +138,16 @@ textarea {
     /* max-height: 4rem; */
     border: 1px solid white;
     border-radius: 10px;
-    margin: 0 auto;
+    margin:0 auto;
     font-family: impact, sans-serif;
     font-size: 30px;
     text-align: center;
     background-color: rgb(175, 170, 177);
     /* color: black; */
     padding: 12px;
+    
 }
+
 
 .impact {
     font-size: 16px;
@@ -182,41 +177,39 @@ textarea {
     width: 100px;
     border-radius: 4px;
 }
-
 #size {
     margin: 10px;
     color: black;
-}
-
-.uploud {
-    width: 91px;
-    padding: 5px;
-}
-
-.uploud input {
+  }
+  
+.uploud{
+    width: 107px;
+  }
+.uploud input{
     width: 100%;
-}
+}  
 
-#line-choose {
+#line-choose{
     width: 35px;
     height: 35px;
     border-radius: 5px;
 }
 
-@media screen and (max-width:740px) {
-    .main-container {
+@media screen and (max-width:740px){
+    .main-container{
         flex-direction: column;
         /* height: 700px; */
         justify-content: space-around;
     }
-    .canvas-container {
+    .canvas-container{
         width: 500px;
     }
-    .editor-container {
+
+    .editor-container{
         width: 93%;
         height: 400px;
     }
-    .links-container {
+    .links-container{
         width: 50%;
     }
 }

@@ -12,58 +12,61 @@
 </head>
 
 <body onload="init()">
-        <header>
-                <a href="index.html">
-                    <button>gallery</i></button>
-                </a>
-                <a href="editor.html">
-                    <button>editor</i></button>
-                </a>
-                <select class="select-lang" onchange="onSelectLang(this.value)">
-                    <option>language</option>
-                    <option value="en">English</option>
-                    <option value="he">עברית</option>
-                </select>
-            </header>
+    <header>
+        <div class="links-container">
+            <a href="index.html">
+                Gallery
+            </a>
+            <a href="editor.html">
+                Editor
+            </a>
+            <select class="select-lang" onchange="onSelectLang(this.value)">
+                <option>language</option>
+                <option value="en">English</option>
+                <option value="he">עברית</option>
+            </select>
+        </div>
+    </header>
 
-
-
-    <div class="searching">
-        <input list="searching" data-trans="searching" class="search" name="searching" placeholder="filter by keywords"
-            onkeydown="checkEnter(event)" />
-        <datalist id="searching">
-            <option value="happy">
-            <option value="man">
-            <option value="woman">
-            <option value="angry">
-            <option value="child">
-        </datalist>
-        <button data-trans="search" onclick="onSearch()">search</button>
+    <div class="search-container">
+        <div class="input-container">
+            <input list="searching" data-trans="searching" class="search" name="searching"
+                placeholder="filter by keywords" onkeydown="checkEnter(event)" />
+            <datalist id="searching">
+                <option value="happy">
+                <option value="man">
+                <option value="woman">
+                <option value="angry">
+                <option value="child">
+            </datalist>
+            <img onclick="onSearch()" src="./icons/search-icon.png" alt="">
+            <!-- <button data-trans="search" onclick="onSearch()"</button> -->
+        </div>
+        <div class="keyword-search">
+        </div>
     </div>
-        
-        <!-- <button  class="button" data-trans="load-80s"></button> -->
-        <ul class="tags">
+
+    <!-- <button  class="button" data-trans="load-80s"></button> -->
+    <!-- <ul class="tags">
             <li><a href="#" onclick="onLoadTag(this)" data-loc="80" data-trans="load-80s" class="tag">"The  80's"</a></li>
-        </ul>
+        </ul> -->
 
-    <div class="keyword-search">
-    </div>
 
     <div class="main-container">
     </div>
 
     <section class="about-us">
-        <div class="chen">
-            <img src="img/creators/chen.jpg" alt="">
-            <div>
-                <h2 data-trans="chen">Chen Mordechai</h2>
-                <p data-trans="lorem-chen">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo
-                    quia assumenda minima magni
-                    ad illum eum odio numquam, quaerat corporis, dolorum aut et reprehenderit cum dolorem adipisci, in
-                    id?</p>
-            </div>
+        <img src="img/creators/chen.jpg" alt="">
+        <div class="text-container">
+            <h2 data-trans="chen">Chen Mordechai</h2>
+            <p data-trans="lorem-chen">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore explicabo
+                quia assumenda minima magni
+                ad illum eum odio numquam, quaerat corporis, dolorum aut et reprehenderit cum dolorem adipisci, in
+                id? Lorem ipsum dolor sit amet consectetur adipisicing elit. A, voluptatibus perspiciatis. Illum amet
+                dolorum libero accusantium at quidem praesentium dignissimos cupiditate porro aperiam ducimus, ab
+                molestiae earum molestias. Incidunt, similique! lo</p>
         </div>
-       
+
     </section>
 
     <div class="contact-us">
@@ -83,7 +86,7 @@
         </div>
 
         <button data-trans="submit" type="button" onclick="onSubmit()" class="btn btn-primary">submit</button>
-    </section>
+        </section>
 
     </div>
 
